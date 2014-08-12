@@ -55,7 +55,6 @@ void loop() {
       } else {
         digitalWrite(GREEN_LED, LOW);
       }
-      lastmillis = millis();
     }
   }
 
