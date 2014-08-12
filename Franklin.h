@@ -37,10 +37,6 @@ enum {
 #define FRANKLIN_IRQ_DISTURBER 0x04
 #define FRANKLIN_IRQ_LIGHTNING 0x08
 
-// Library versioning.
-extern const char *Franklin_Version_String;
-extern const uint16_t Franklin_Version;
-
 class Franklin {
 	private:
 		int _csPin, _irqPin;
@@ -73,6 +69,7 @@ class Franklin {
 		int getState(void);
 
 		void setIndoors(boolean yesno);
+		void setCustomGain(uint16_t afegain);
 		boolean getIndoorOutdoor(void);  // true = indoor AFE setting, false = outdoor AFE setting
 
 		int getNoiseFloor(void);

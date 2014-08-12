@@ -18,6 +18,10 @@ void setup() {
   SPI.setClockDivider(F_CPU / 2000000);  // 2MHz SPI max supported by AS3935
   SPI.setDataMode(SPI_MODE1);
   SPI.setBitOrder(MSBFIRST);
+  pinMode(RED_LED, OUTPUT);
+  pinMode(GREEN_LED, OUTPUT);
+  digitalWrite(RED_LED, LOW);
+  digitalWrite(GREEN_LED, LOW);
 
   Serial.println("This is CountLightning.ino - Here we will count lightning events as they come through.");
 
@@ -39,10 +43,18 @@ void setup() {
 void loop() {
   static uint16_t lightning_count = 0;
   static uint16_t min_distance = 0xFFFF;
+  static uint32_t lastmillis = 0;
   int state, i;
 
-  while (!lsensor.available())
-    ;
+  while (!lsensor.available()) {
+    if (millis()-lastmillis() > 300000) {  // 5 minutes
+      if (lightning_count) {
+        lightning_count = 0;
+      } else {
+        digitalWrite(GREEN_LED, LOW);
+      }
+    }
+  }
 
   state = lsensor.getState();
   switch (state) {
@@ -54,9 +66,11 @@ void loop() {
       break;
     case FRANKLIN_STATE_LISTENING:
       //Serial.println("AS3935 State: LISTENING");
+      digitalWrite(RED_LED, LOW);
       break;
     case FRANKLIN_STATE_NOISY:
       //Serial.println("AS3935 State: NOISY");
+      digitalWrite(RED_LED, HIGH);
       break;
     case FRANKLIN_STATE_LIGHTNING:
       //Serial.println("AS3935 State: LIGHTNING");
@@ -73,9 +87,12 @@ void loop() {
         Serial.print("no distance known.");
       }
       Serial.println();
+      digitalWrite(RED_LED, LOW);
+      digitalWrite(GREEN_LED, HIGH);
       break;
     case FRANKLIN_STATE_DISTURBER:
       //Serial.println("AS3935 State: DISTURBER");
+      digitalWrite(RED_LED, LOW);
       break;
   }
 }

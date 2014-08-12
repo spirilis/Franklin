@@ -7,9 +7,6 @@
 #include "Franklin.h"
 
 
-const char *Franklin_Version_String = "0.1";
-const uint16_t Franklin_Version = 0x0001;
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -427,6 +424,11 @@ void Franklin::setIndoors(boolean yesno)
 		writePartialReg(0x00, 0x12, 5, 1);
 	else
 		writePartialReg(0x00, 0x0E, 5, 1);
+}
+
+void Franklin::setCustomGain(uint16_t afegain)
+{
+	writePartialReg(0x00, afegain, 5, 1);
 }
 
 boolean Franklin::getIndoorOutdoor(void)
