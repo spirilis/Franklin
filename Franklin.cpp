@@ -7,6 +7,9 @@
 #include "Franklin.h"
 
 
+const char *Franklin_Version_String = "0.1";
+const uint16_t Franklin_Version = 0x0001;
+
 #ifdef __cplusplus
 extern "C" {
 #endif
