@@ -47,12 +47,15 @@ void loop() {
   int state, i;
 
   while (!lsensor.available()) {
-    if (millis()-lastmillis() > 300000) {  // 5 minutes
+    if (millis()-lastmillis > 300000) {  // 5 minutes
+      lastmillis = millis();
+
       if (lightning_count) {
         lightning_count = 0;
       } else {
         digitalWrite(GREEN_LED, LOW);
       }
+      lastmillis = millis();
     }
   }
 
