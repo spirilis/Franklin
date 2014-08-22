@@ -72,6 +72,15 @@ void Franklin::begin(void)
 	_franklin_pending_IRQ = false;
 }
 
+void Franklin::power(boolean yesno)
+{
+    if (yesno) {
+        writePartialReg(0x00, 0, 1, 0); // PWD (powerdown) = 0, enabled
+    } else {
+        writePartialReg(0x00, 1, 1, 0); // PWD (powerdown) = 1, disabled
+    }
+}
+
 uint8_t Franklin::readReg(uint8_t addr)
 {
 	uint8_t ret;
