@@ -57,7 +57,7 @@ class Franklin {
 		void end();
 		boolean available();
 		void clear();
-        void power(boolean yesno);
+		void power(boolean yesno);
 
 		uint8_t readReg(uint8_t addr);
 		void writeReg(uint8_t addr, uint8_t value);
@@ -75,8 +75,11 @@ class Franklin {
 
 		int getNoiseFloor(void);
 		int setNoiseFloor(int uVrms);
+		unsigned int getNoiseFloorBits(void);
+		void setNoiseFloorBits(unsigned int);
 
 		void squelchDisturbers(boolean yesno);
+		boolean getSquelchDisturbers(void);
 
 		int getSignalThreshold(void);
 		void setSignalThreshold(int wdth);

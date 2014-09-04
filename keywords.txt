@@ -6,6 +6,7 @@ setCalibration	KEYWORD2
 getCalibration	KEYWORD2
 begin	KEYWORD2
 end	KEYWORD2
+power	KEYWORD2
 available	KEYWORD2
 clear	KEYWORD2
 readReg	KEYWORD2
@@ -19,7 +20,10 @@ setIndoors	KEYWORD2
 getIndoorOutdoor	KEYWORD2
 getNoiseFloor	KEYWORD2
 setNoiseFloor	KEYWORD2
+getNoiseFloorBits	KEYWORD2
+setNoiseFloorBits	KEYWORD2
 squelchDisturbers	KEYWORD2
+getSquelchDisturbers	KEYWORD2
 getSignalThreshold	KEYWORD2
 setSignalThreshold	KEYWORD2
 getStormDistance	KEYWORD2

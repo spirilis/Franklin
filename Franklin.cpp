@@ -450,6 +450,18 @@ boolean Franklin::getIndoorOutdoor(void)
 	return false;
 }
 
+unsigned int Franklin::getNoiseFloorBits(void)
+{
+	return readPartialReg(0x01, 3, 4);
+}
+
+void Franklin::setNoiseFloorBits(unsigned int val)
+{
+	if (val > 7)
+		val = 7;
+	writePartialReg(0x01, val, 3, 4);
+}
+
 int Franklin::getNoiseFloor(void)
 {
 	boolean indoors = getIndoorOutdoor();
@@ -589,6 +601,15 @@ void Franklin::squelchDisturbers(boolean yesno)
 		writePartialReg(0x03, 1, 1, 5);
 	else
 		writePartialReg(0x03, 0, 1, 5);
+}
+
+boolean Franklin::getSquelchDisturbers()
+{
+	uint8_t r = readPartialReg(0x03, 1, 5);
+	if (r) {
+		return true;
+	}
+	return false;
 }
 
 int Franklin::getSignalThreshold(void)
